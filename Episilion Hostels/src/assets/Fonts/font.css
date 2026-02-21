@@ -1,0 +1,84 @@
+@font-face{
+  font-family: "Playfair Display";
+  src: url(fonts/PlayfairDisplaySC-Bold.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: "lato";
+  src: url(fonts/Lato-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: "lobstar Two";
+  src: url(fonts/LobsterTwo-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: PriceMart;
+  src: url(fonts/Pricemart_Sign/Pricemart_Sign.otf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Comorant-Garamond;
+  src: url(fonts/static/CormorantGaramond-SemiBold.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+    font-family: Hezba;
+    src: url(fonts/HezbaRegular-vnogD.ttf);
+    /* font-weight: normal;
+    font-style: normal; */
+}
+
+
+@font-face{
+  font-family: "BBHBartle";
+  src: url(fonts/BBHBartle-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: Sancreek;
+  src: url(fonts/Sancreek-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: Fonte;
+  src: url(fonts/FONTE___.TTF);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: ZakenManus;
+  src: url(fonts/ZakenManus.otf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: Survalia;
+  src: url(fonts/Survalia.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family: AntipastoPro;
+  src: url(fonts/AntipastoPro-ExtraBold_trial.ttf);
+  font-weight: normal;
+  font-style: normal;
+}

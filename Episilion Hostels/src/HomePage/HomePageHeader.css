@@ -1,0 +1,232 @@
+/* ---- CROSS-BROWSER RESET ---- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+html {
+  scroll-behavior: smooth 5s;
+  scroll-padding-top: 70px; /* equal to your header height */
+}
+
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---- CROSS-BROWSER PREFIXES ---- */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.smooth {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.blur {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px black;
+  text-stroke: 1px black;
+}
+.header-section{
+  /* border: solid red; */
+  height: 10%;
+  display: flex;
+  align-items: center;
+  /* width: 100vw; */
+  justify-content: space-between;
+  flex-wrap: wrap;/*THIS LET ITEMS WRAP TO THE NEXT LINE IF THE SCREEN IS TO SMALL*/
+  background-color: #d3c84d;
+
+  position: sticky;/*THIS MAKES THE HEADER STICKY WHEN SCOLLING IF YOU MAKE THIS sticky YOU WONT NEED THE WIDTH*/
+  top: 0;/*STCIKS THE HEADER AT THE VERY TOP OF THE PAGE*/
+  z-index: 1000;/*THIS ENSURES THE HEADER STAYS ABOVE THE CONTENT*/
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: scroll;
+  overflow: hidden;
+  scrollbar-width: none;
+
+}
+
+.login-systems{
+  width: 20vw;
+  display: flex;
+  /* flex-wrap: wrap; */
+  text-align: center;
+  align-items: center;
+  justify-content:space-around;
+  gap: 10px;
+}
+.login-systems > a{
+  font-size: 20px;
+  border-radius: 11px;
+  width: 50%;
+  background: black;
+  color: white;
+  text-decoration: none;
+  padding: 8px;
+  font-weight: bolder;
+}
+.episilion{
+  font-size: 15px;
+  text-decoration: none; 
+  color: rgb(194, 8, 8); 
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+.episilion p{
+  font-family: BBHBartle;
+}
+.episilion:active {
+  border: solid white;
+  border-radius: 10px;
+}
+.navigation-links{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex: 1 1 auto;/*(flex_grow: 1)NAV TAKES REMAINING SPACE (flex_shrink: 1)SHRINKS IF SCREEN IS NARROW (flex-basis: auto)NATURAL SIZE.THIS MAKES NAV AUTOMATICALLY ADJUST TO DIFFRENT WIDTHS*/
+  text-align: right;
+  align-items: center;
+  justify-content: space-between;
+  /* border: solid red; */
+  padding-left: 50px;
+}
+.navigation-links .link{
+  text-decoration: none;
+  /* border: solid red; */
+  font-family: AntipastoPro;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+.link{
+  float: left;
+}
+
+
+.hamburger-button{
+  display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 992px){
+    /* Default hidden sidebar */
+  .navigation-links {
+    position: fixed;
+    top: 0;
+    right: -5050px;  /*hide off-screen */
+    height: 100%;
+    width: 65%;
+    background-color: #d3c84d;
+    display: flex;
+    opacity: 1;/*THIS MAKES IT DISAPEAR INITIALLY BUT ONLY REAPPEARS WHEN THE BUTTON IS CLICKED*/
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding-top: 1rem;
+    transition: right 0.3s ease-in-out;
+    overflow: scroll;
+    padding-left: 0px;
+  }
+  /* Active state: visible sidebar */
+  .navigation-links.active {
+    right: 0;
+    opacity: 1;
+  }
+
+  /* Style links inside sidebar */
+  .navigation-links a {
+    padding: 1rem;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .login-systems{
+    width: 60vw;
+  }
+  .login-systems > a{
+    padding: 8px;
+  }
+
+  .hamburger-button {
+    display: block;
+    cursor: pointer;
+    width: 5%;
+    height: 100%;
+    border: none;
+  }
+  .hamburger-button img{
+    background-color: #d3c84d;
+    height: 100%;
+    width: 100%;
+  }
+  .navigation-links {
+    display: flex;
+  }
+
+  .login-systems a{
+    margin-left: 0px;
+  }
+}
+
+/*Mobile Display*/
+@media screen and (max-width: 600px){
+
+  .hamburger-button {
+    width: 10%;
+    height: 40%;
+    border: none;
+  }
+  .navigation-links.active {
+    right: 0;
+    opacity: 1;
+  }
+
+  #all-rights-text{
+    width: 100%;
+    text-align: center;
+  }
+  .footer-links{
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+
+
+@media screen and (min-width: 600px) and (max-width: 992px){
+  .hamburger-button {
+    width: 8%;
+    height: 50%;
+    border: none;
+  }
+}

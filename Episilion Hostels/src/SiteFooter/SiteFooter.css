@@ -1,0 +1,40 @@
+
+/*THIS IS THE FOOTER SECTION*/
+.site-footer {
+  position: fixed; /* This makes the footer fixed at the bottom */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}
+.footer-content{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;/*THIS LIMITS FOOTER WIDTH ON LARGE SCREENS*/
+  margin: 0 auto;/*THIS WILL CENTER THE CONTENT HORIZONTALLY*/
+  gap: 1rem;
+}
+.site-footer p{
+  margin: 0;/*THIS WILL REMOVE THE DEFAULT MARGIN*/
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+.footer-links{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-links a{
+  color: #ffffff;
+  text-decoration: none;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  transition: color 0.3s;
+}
+
+.footer-links a:hover{
+  color: #00bfff;
+}

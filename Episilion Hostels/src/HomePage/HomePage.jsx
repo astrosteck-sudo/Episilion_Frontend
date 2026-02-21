@@ -3,6 +3,7 @@ import { PageHeader } from "../PageHeader/PageHeader.jsx"
 import axios from 'axios';
 import { HostelCard } from "./HostelCard.jsx";
 import './HomePage.css'
+import { SiteFooter } from "../SiteFooter/SiteFooter.jsx";
 
 
 export function HomePage() {
@@ -75,6 +76,8 @@ export function HomePage() {
                     })}
                 </div>
             </section>
+
+            <SiteFooter/>
         </>
 
     )

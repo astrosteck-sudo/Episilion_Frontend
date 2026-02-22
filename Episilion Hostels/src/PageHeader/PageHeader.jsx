@@ -3,7 +3,7 @@ import HamburgerButton from '../assets/icons/hamburger_button_2.png';
 import { Link } from 'react-router-dom'
 // import { useEffect } from 'react';
 
-export function PageHeader() {
+export function PageHeader({ substituteLink }) {
 
     return (
         <>
@@ -12,6 +12,7 @@ export function PageHeader() {
                     <p>Episilion <div>Hostels</div></p>
                 </Link>
                 <nav className="navigation-links">
+                    {substituteLink}
                     <Link className="link" to="/">About Us</Link>
                     <Link className="link" to="/">Ask Episilion</Link>
                     <Link className="link" to="/">More From Us</Link>

@@ -6,8 +6,7 @@ export function HostelCard({ hostel }) {
 
    
     function showHostelId(parameter){
-
-        console.log(parameter)
+        window.location.href = `moreDetails?hostelId=${parameter}`;
     }
 
     return (

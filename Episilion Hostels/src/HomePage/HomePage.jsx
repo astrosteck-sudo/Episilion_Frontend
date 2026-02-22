@@ -1,23 +1,12 @@
-import { useEffect, useState } from "react";
 import { PageHeader } from "../PageHeader/PageHeader.jsx"
-import axios from 'axios';
 import { HostelCard } from "./HostelCard.jsx";
 import './HomePage.css'
 import { SiteFooter } from "../SiteFooter/SiteFooter.jsx";
 
 
-export function HomePage() {
+export function HomePage({ hostelsCardData }) {
 
-    const [hostelsCardData, sethostelsCardData] = useState([])
-
-    const loadHostelsCard = async () => {
-        const response = await axios.get('/hostel_data/hostel_data.json')
-        sethostelsCardData(response.data);
-
-    }
-    useEffect(() => {
-        loadHostelsCard();
-    }, []);
+    
     return (
         <>
             <PageHeader />
@@ -31,7 +20,7 @@ export function HomePage() {
                 </div>
             </section>
 
-            
+
             <SiteFooter/>
         </>
 

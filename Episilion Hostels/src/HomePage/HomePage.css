@@ -91,3 +91,247 @@
 .td-vetical{
     vertical-align: top;
 }
+
+
+
+
+
+
+
+.filter-image{
+  border: solid #d3c84d;
+  width: min(40px, 30%);
+  height: min(50px, 10%);
+  margin-left: 5px;
+  display: block;
+  cursor: pointer;
+  position: fixed;/*THIS MAKES THE HEADER STICKY WHEN SCOLLING IF YOU MAKE THIS sticky YOU WONT NEED THE WIDTH*/
+  z-index: 1000;/*THIS ENSURES THE button STAYS ABOVE THE CONTENT AND ALWAYS IN FRONT OF THE CONTENT*/
+  background-color: white;
+  border-radius: 0px 0px 5px 5px;
+}
+.filter-image:active {
+  transform: scale(0.9); /* shrinks slightly when clicked */
+}
+ .search-box-container {
+  display: flex;              /* enable flexbox */
+  justify-content: center;    /* center horizontally */
+  /*align-items: center;        center Vertically */
+  height: clamp(2px, 1vw, 1%);              /* full viewport height */
+}
+.search-box {
+  width: min(400px, 60%);             /* fixed small width */
+  height: min(50px, 40%);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 16px;            /* readable text */
+  background-color: #ffffff;
+  border-radius: 23px 23px 23px 23px;
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  justify-content: center;    /* center horizontally */
+  margin-top: 10px;
+}
+#search-box-text{
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;         /* rounded corners */
+  font-size: clamp(1rem,2vw, 1.3rem);
+  text-align: center;
+  border: none;
+  background-color: #f5f5f5;
+  border-radius: 23px 23px 23px 23px;
+  
+}
+.search-icon{
+  width: min(40px, 30%);  /* adjust size */
+  cursor: pointer;
+  height: 100%;
+}
+
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 1000;
+  margin-top: 25px;
+}
+
+.suggestion-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.suggestion-item:hover {
+  background-color: #f5f5f5;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+
+
+
+.filter{
+  height: 30%;
+  top: 0;
+  height: 95%;
+  width: min(300px, 70%);
+  opacity: 0;
+  background-color: #d3c84d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding-top: 1rem;
+  transition: right 0.3s ease-in-out;
+  opacity: 0; 
+  transition: opacity 0.3s ease;
+  display: block;
+  position: fixed;/*THIS MAKES THE HEADER STICKY WHEN SCOLLING IF YOU MAKE THIS sticky YOU WONT NEED THE WIDTH*/
+  z-index: 1000;/*THIS ENSURES THE button STAYS ABOVE THE CONTENT AND ALWAYS IN FRONT OF THE CONTENT*/
+  pointer-events: none;/*THIS WILL MAKE SURE THAT WHEN THE OPACITY IS SET TO ZERO IT CAN NOT BE CLICKABLE*/
+}
+.filter.open { 
+  opacity: 1; 
+  pointer-events: auto; 
+}
+.close-button {
+  position: absolute;   /* place it in a corner */
+  top: 10px;
+  right: 10px;
+  cursor: pointer;      /* show pointer on hover */
+  width: 20px;
+  height: 30px;
+}
+.close-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* keep image proportions */
+}
+.filter-by-items{
+  width: 100%;
+  margin-top: 30px;
+}
+.gender-button{
+  width: 31.3%;/*THIS WILL MAKE SURE BOTH BUTTONS WILL TAKE 50% EACH OF THE SPACE*/
+  background-color: #ffffff;
+  font-weight: bolder;
+  border-radius: 5px;
+  height: 40px;
+  cursor: pointer;
+}
+.gender-button:active {
+  transform: scale(0.9); /* shrinks slightly when clicked */
+}
+.male-filter-icon, .female-filter-icon, .mixed-filter-icon{
+  width: min(20px, 30%);
+  float: left;
+  cursor: pointer;
+  height: 26px;
+}
+.filter-search-box:active {
+  background-color: #c2c5a4;
+}
+
+.filter-search-box-container {
+  display: flex;              /* enable flexbox */
+  justify-content: center;    /* center horizontally */
+  align-items: center;        /* center vertically */
+  height: 100px;  
+}
+
+.filter-search-box {
+  display: flex;              /* align text + icon nicely */
+  align-items: center;
+  gap: 8px;                   /* spacing between text and icon */
+  background: #f0f0f0;        /* example styling */
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.filter-search-box-text{
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+}
+
+.filter-search-icon {
+  width: 24px;  /* adjust size */
+  height: 24px;
+  transition: transform .6s ease;
+}
+.filter-header{
+  font-family: Playfair Display;
+  text-align: center;
+}
+
+/*THIS IS TO REMOVE THE ARROWS IN THE INPUT ELEMENT*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.price-filter{
+  margin-top: 20px;
+}
+.price-heading{
+  text-align: center;
+}
+.price-input-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.price-input{
+  width: 45%;
+  text-align: center;
+  height: 40px;
+  border-radius: 5px;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.no-results{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 50px;
+}
+.not-found-icon{
+  width: min(300px, 60%);
+}
+.not-found-text{
+  margin-bottom: 20px;
+  font-family: Fonte;
+  font-size: clamp(90px, 10%);
+  font-weight: bold;
+}
+.not-found-hostel-name{
+  color: red;
+  font-weight: bolder;
+}

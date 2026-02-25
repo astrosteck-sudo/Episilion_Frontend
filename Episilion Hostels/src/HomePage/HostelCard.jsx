@@ -13,8 +13,8 @@ export function HostelCard({ hostel }) {
         <div className="hostel-card">
             <div className="image-container">
                 <img id="hostel-card-image" src={hostel.image} alt="hostel-image"></img>
-                <div className="overlay">
-                    <span className="overlay-text">{hostel.reviews.averageRating}({hostel.reviews.totalReviews})</span><br></br>
+                <div className="hostel-rating-text">
+                    <span className="overlay-text-hostel-rating">{hostel.reviews.averageRating}({hostel.reviews.totalReviews})</span><br></br>
                 </div>
                 <div className="hostel-type-text">
                     <span className="overlay-text-hostel-type">{hostel.type}</span>

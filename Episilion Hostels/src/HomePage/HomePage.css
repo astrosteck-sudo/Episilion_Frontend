@@ -32,7 +32,7 @@
   border-radius: 7px 7px 0px 0px;
   display: block;
 }
-.overlay{
+.hostel-rating-text{
   position: absolute; 
   bottom: 8px; /* distance from bottom edge */ 
   right: 8px; /* distance from right edge */ 
@@ -75,7 +75,7 @@
   text-decoration: solid;
 }
 .hostel-card:hover{
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 .view-more-details{
   width: 100%;
@@ -89,7 +89,7 @@
   background-color: rgb(8, 92, 120);
 }
 .td-vetical{
-    vertical-align: top;
+  vertical-align: top;
 }
 
 

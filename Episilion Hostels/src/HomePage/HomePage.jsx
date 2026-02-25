@@ -16,6 +16,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     const [genderText, setGenderText] = useState('Search');
     const [minPrice, setMinPrice] = useState();
     const [maxPrice, setMaxPrice] = useState();
+    const [searchHostelName, setSearchHostelName] = useState('')
 
     const filterMenu = useRef(null) //THIS WILL SELECT THE filter menu 
 
@@ -45,14 +46,36 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         setGender(parameter);//THIS WILL PUT THE CLCIKED GENDER INTO THE gender VARIABLE 
     }
 
-    
 
+
+
+    function userSearchedHostelName(event) {
+        //.trim() removes leading/trailing spaces. 
+        // .replace(/\s+/g, " ",) collapses multiple spaces into one. 
+        // .toLowerCase() normalizes casing.
+        const value = event.target.value
+            .trim()
+            .replace(/\s+/g, " ")
+            .toLowerCase();
+
+        setSearchHostelName(value);
+    }
 
     function userMinPrice(event) {
         setMinPrice(event.target.value)
     }
     function userMaxPrice(event) {
         setMaxPrice(event.target.value)
+    }
+
+
+
+    function searchHostelByName() {
+        console.log(searchHostelName)
+        const filteredHostels = originalHostelCardData.filter(
+            (hostel) => hostel.name.trim().replace(/\s+/g, " ").toLowerCase() === searchHostelName
+        )
+        sethostelsCardData(filteredHostels);
     }
     function searchHostels() {
         if (!gender && !minPrice && !maxPrice) {
@@ -167,8 +190,16 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
 
             <section className="search-box-container">
                 <div className="search-box">
-                    <input type="text" name="search-box" id="search-box-text" placeholder="Search Hostel By Name" list="Hostels"></input>
-                    <img className="search-icon" src={searchButton}></img>
+                    <input
+                        type="text"
+                        name="search-box"
+                        id="search-box-text"
+                        placeholder="Search Hostel By Name"
+                        list="Hostels"
+                        onChange={userSearchedHostelName}
+                    >
+                    </input>
+                    <img className="search-icon" src={searchButton} onClick={searchHostelByName}></img>
                     <div id="suggestions" class="suggestions-dropdown"></div>
                 </div>
             </section>

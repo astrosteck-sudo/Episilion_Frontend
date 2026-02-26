@@ -36,10 +36,11 @@
   position: absolute; 
   bottom: 8px; /* distance from bottom edge */ 
   right: 8px; /* distance from right edge */ 
-  background: #ffffff; /* semi-transparent background */ 
-  color: black; padding: 4px 8px; 
+  color: white; 
+  padding: 4px 8px; 
   border-radius: 4px; font-size: 0.9rem;
   font-weight: bolder;
+  background: linear-gradient(45deg, #2e3192, #1bffff);
 }
 
 .hostel-type-text{
@@ -47,9 +48,11 @@
   bottom: 8px; /* distance from bottom edge */ 
   left: 8px; /* distance from right edge */ 
   background: #ffffff; /* semi-transparent background */ 
-  color: black; padding: 4px 8px; 
+  color: white; 
+  padding: 4px 8px; 
   border-radius: 4px; font-size: 0.9rem;
   font-weight: bolder;
+  background: linear-gradient(45deg, #2e3192, #1bffff);
 }
 #hostel-price{
   color: green;
@@ -165,12 +168,15 @@
   border-radius: 0 0 8px 8px;
   max-height: 200px;
   overflow-y: auto;
-  display: none;
+  /* display: none; */
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   z-index: 1000;
   margin-top: 25px;
 }
-
+.suggestions-dropdown.close{
+  border: solid green;
+  display: none;
+}
 
 .suggestion-item {
   padding: 10px 15px;

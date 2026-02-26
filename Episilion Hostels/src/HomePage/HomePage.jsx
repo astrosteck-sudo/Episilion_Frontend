@@ -18,10 +18,15 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     const [maxPrice, setMaxPrice] = useState();
     const [searchHostelName, setSearchHostelName] = useState('')
     const [filter, setFilter] = useState();
+    const [suggestionBoxOpen, setSuggestionBoxOpen] = useState(true)
+    const [value, setValue] = useState('')
 
     const filterMenu = useRef(null) //THIS WILL SELECT THE filter menu 
-    const suggestionsDiv = useRef(null); // THIS WILL SELECT THE SUUGESSTION 
 
+
+
+
+                                      //THIS IS FOR THE FILTER MENU
     function openFilterMenu() {
         if (filterMenu.current) {
             console.log(filterMenu)
@@ -54,65 +59,11 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         setGender(parameter);//THIS WILL PUT THE CLCIKED GENDER INTO THE gender VARIABLE 
     }
 
-    function userSearchedHostelName(event) {
-        //.trim() removes leading/trailing spaces. 
-        // .replace(/\s+/g, " ",) collapses multiple spaces into one. 
-        // .toLowerCase() normalizes casing.
-        const value = event.target.value
-            .trim()
-            .replace(/\s+/g, " ")
-            .toLowerCase();
-
-        //THIS CODE FIRST RUNS THE VALUE TO SEE IF ANY OF THE HOSTEL NAME CONTAINS THE LETTER OR SEQUENCE OF LETTERS
-        //THE IF THE VALUE LENGTH IS ZERO IT JUST HIDES THE SUGGESTION BOX, IF NOT IS SHOWS IT
-        let filtered = originalHostelCardData.filter(
-            hostel => hostel.name.toLowerCase().includes(value)
-        )
-        if (value.length === 0) {
-            suggestionsDiv.current.style.display = 'none';
-            return;
-        } else {
-            setSearchHostelName(value);//THIS IS THE USERS HOSTEL NAME HE TYPES
-            setFilter(filtered)//THIS IS THE COLLECTION OF THE HOSTELS THAT FIT THE filter CRITIRIA
-        }
-    }
-
-
     function userMinPrice(event) {
         setMinPrice(event.target.value)
     }
     function userMaxPrice(event) {
         setMaxPrice(event.target.value)
-    }
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (!event.target.closest('.suggestions-dropdown') && !event.target.closest('.search-box')) {
-                if (suggestionsDiv.current) {
-                    console.log('Document apart from suggestion has been clicked')
-                    suggestionsDiv.current.style.display = 'none';
-                }
-            }
-        };
-        document.addEventListener('click', handleClickOutside);
-        return () => document.removeEventListener('click', handleClickOutside);
-    }, []);
-
-    //THIS FUNCTION TAKES THE HOSTEL NAME AS A PARAMETER, IT THE FILTERS THE HOSTEL IN THE originalHostelCardData
-    //TO SEE IF ANY HOSTEL NAME MATCH IF IT DOES THEN IT sethostelsCardData TO THAT HOSTEL OBJECT
-    function suggestionHostelClicked(parameter){
-        suggestionsDiv.current.style.display = 'none';
-        const filteredHostel = originalHostelCardData.filter(
-            (hostel) => hostel.name.trim().replace(/\s+/g, " ").toLowerCase() === parameter.trim().replace(/\s+/g, " ").toLowerCase()
-        )
-        sethostelsCardData(filteredHostel);
-    }
-
-    function searchHostelByName() {
-        const filteredHostels = originalHostelCardData.filter(
-            (hostel) => hostel.name.trim().replace(/\s+/g, " ").toLowerCase() === searchHostelName
-        )
-        sethostelsCardData(filteredHostels);
     }
     function searchHostels() {
         if (!gender && !minPrice && !maxPrice) {
@@ -148,9 +99,6 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         setMaxPrice('');
         setGender();
         setGenderText('Search');
-
-
-
         //THIS IS A MORE EIFFICIENT CODE TO REPLACE THE ONE ABOVE BUT I DONT UNDERSTAND IT YET SO ITS COMMENTED
         // const filteredData = originalHostelCardData.filter(hostel => 
         //     selectedGender ? hostel.type === selectedGender : true)
@@ -158,6 +106,72 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         // filterMenu.current.style.opacity = 0;
         // filterMenu.current.style.pointerEvents = 'none';
     }
+
+
+
+
+
+
+                        //THIS IS FOR THE SUGGESTIONBOX AND SEARCH BAR
+    function userSearchedHostelName(event) {
+        setSuggestionBoxOpen(true)
+        setValue(event.target.value)//THIS MAKES SURE THAT AS THE USER TYPES THE TEXT IS DISPLAYED ON THE THE SEARCH INPUT
+        //.trim() removes leading/trailing spaces. 
+        // .replace(/\s+/g, " ",) collapses multiple spaces into one. 
+        // .toLowerCase() normalizes casing.
+        const typedtext = event.target.value
+            .trim()
+            .replace(/\s+/g, " ")
+            .toLowerCase();
+        
+
+        //THIS CODE FIRST RUNS THE typedtext TO SEE IF ANY OF THE HOSTEL NAME CONTAINS THE LETTER OR SEQUENCE OF LETTERS
+        //THE IF THE typedtext LENGTH IS ZERO IT JUST HIDES THE SUGGESTION BOX, IF NOT IS SHOWS IT
+        let filtered = originalHostelCardData.filter(
+            hostel => hostel.name.toLowerCase().includes(typedtext)
+        )
+        setSearchHostelName(typedtext);//THIS IS THE USERS HOSTEL NAME HE TYPES
+        setFilter(filtered)//THIS IS THE COLLECTION OF THE HOSTELS THAT FIT THE filter CRITIRIA
+    }
+
+
+    
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!event.target.closest('.suggestions-dropdown')) {
+                setSuggestionBoxOpen(false)
+            }
+        };
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, []);
+
+    //THIS FUNCTION TAKES THE HOSTEL NAME AS A PARAMETER, IT THE FILTERS THE HOSTEL IN THE originalHostelCardData
+    //TO SEE IF ANY HOSTEL NAME MATCH IF IT DOES THEN IT sethostelsCardData TO THAT HOSTEL OBJECT
+    function suggestionHostelClicked(parameter){
+        setSuggestionBoxOpen(false)
+        setValue(parameter)
+
+        //suggestionsDiv.current.style.display = 'none';
+        const filteredHostel = originalHostelCardData.filter(
+            (hostel) => hostel.name.trim().replace(/\s+/g, " ").toLowerCase() === parameter.trim().replace(/\s+/g, " ").toLowerCase()
+        )
+        sethostelsCardData(filteredHostel);
+    }
+
+    function searchHostelByName() {
+        //THIS WILL MAKE SURE NOTHING HAPPENS WHEN THE USER PREESES 
+        // THE SEARCH BUTTON WHEN THERE IS NOTHING IN THE SEARCH INPUT
+        if(!searchHostelName){
+            return;
+        }
+        const filteredHostels = originalHostelCardData.filter(
+            (hostel) => hostel.name.trim().replace(/\s+/g, " ").toLowerCase() === searchHostelName
+        )
+        sethostelsCardData(filteredHostels);
+    }
+    
 
 
 
@@ -234,18 +248,20 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
                         placeholder="Search Hostel By Name"
                         list="Hostels"
                         onChange={userSearchedHostelName}
+                        value={value}
                     >
                     </input>
                     <img className="search-icon" src={searchButton} onClick={searchHostelByName}></img>
-                    <div id="suggestions" className={`suggestions-dropdown`} ref={suggestionsDiv}>
+                    <div id="suggestions" className={`suggestions-dropdown ${!suggestionBoxOpen ? 'close' : ''}`}>
                         {
-                            filter ? filter.map((hostel) => {
-                                suggestionsDiv.current.style.display = `block`
+                            value ? filter.map((hostel) => {
                                 return (
                                     <div className="suggestion-item" onClick={() => suggestionHostelClicked(hostel.name)}>{hostel.name}</div>
                                 )
                             }) : ''
                         }
+
+                        
                     </div>
                 </div>
             </section>

@@ -8,7 +8,7 @@ import boyImage from '../assets/icons/man.png'
 import girlImage from '../assets/icons/woman-avatar.png'
 import mixedImage from '../assets/icons/shuffle.png'
 import searchButton from '../assets/icons/search.png';
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardData, originalHostelCardData }) {
@@ -17,11 +17,14 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     const [minPrice, setMinPrice] = useState();
     const [maxPrice, setMaxPrice] = useState();
     const [searchHostelName, setSearchHostelName] = useState('')
+    const [filter, setFilter] = useState();
 
     const filterMenu = useRef(null) //THIS WILL SELECT THE filter menu 
+    const suggestionsDiv = useRef(null); // THIS WILL SELECT THE SUUGESSTION 
 
     function openFilterMenu() {
         if (filterMenu.current) {
+            console.log(filterMenu)
             filterMenu.current.style.opacity = 1;
             filterMenu.current.style.pointerEvents = 'auto';
         }
@@ -33,21 +36,23 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         }
     }
     //WITH THIS IF ANY PART OF THE DOCUMENT IS CLICKED WHICH IS NOT THE filter OR filter-image IT WILL CLOSE THE FILTER MENU
-    document.addEventListener('click', (event) => {
-        if (!event.target.closest('.filter') && !event.target.closest('.filter-image')) {
-            filterMenu.current.style.opacity = 0;
-            filterMenu.current.style.pointerEvents = 'none';
-        }
-    })
-
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!event.target.closest('.filter') && !event.target.closest('.filter-image')) {
+                if (filterMenu.current) {
+                    filterMenu.current.style.opacity = 0;
+                    filterMenu.current.style.pointerEvents = 'none';
+                }
+            }
+        };
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, []);
 
     function filterHostelsByGender(parameter) {
         setGenderText(parameter)//THIS WILL CHANGE THE TEXT IN THE search button
         setGender(parameter);//THIS WILL PUT THE CLCIKED GENDER INTO THE gender VARIABLE 
     }
-
-
-
 
     function userSearchedHostelName(event) {
         //.trim() removes leading/trailing spaces. 
@@ -58,8 +63,20 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
             .replace(/\s+/g, " ")
             .toLowerCase();
 
-        setSearchHostelName(value);
+        //THIS CODE FIRST RUNS THE VALUE TO SEE IF ANY OF THE HOSTEL NAME CONTAINS THE LETTER OR SEQUENCE OF LETTERS
+        //THE IF THE VALUE LENGTH IS ZERO IT JUST HIDES THE SUGGESTION BOX, IF NOT IS SHOWS IT
+        let filtered = originalHostelCardData.filter(
+            hostel => hostel.name.toLowerCase().includes(value)
+        )
+        if (value.length === 0) {
+            suggestionsDiv.current.style.display = 'none';
+            return;
+        } else {
+            setSearchHostelName(value);//THIS IS THE USERS HOSTEL NAME HE TYPES
+            setFilter(filtered)//THIS IS THE COLLECTION OF THE HOSTELS THAT FIT THE filter CRITIRIA
+        }
     }
+
 
     function userMinPrice(event) {
         setMinPrice(event.target.value)
@@ -67,11 +84,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     function userMaxPrice(event) {
         setMaxPrice(event.target.value)
     }
-
-
-
     function searchHostelByName() {
-        console.log(searchHostelName)
         const filteredHostels = originalHostelCardData.filter(
             (hostel) => hostel.name.trim().replace(/\s+/g, " ").toLowerCase() === searchHostelName
         )
@@ -200,7 +213,16 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
                     >
                     </input>
                     <img className="search-icon" src={searchButton} onClick={searchHostelByName}></img>
-                    <div id="suggestions" class="suggestions-dropdown"></div>
+                    <div id="suggestions" class={`suggestions-dropdown`} ref={suggestionsDiv}>
+                        {
+                            filter ? filter.map((hostel) => {
+                                suggestionsDiv.current.style.display = `block`
+                                return (
+                                    <div className="suggestion-item">{hostel.name}</div>
+                                )
+                            }) : ''
+                        }
+                    </div>
                 </div>
             </section>
 
@@ -216,6 +238,5 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
             </section>
             <SiteFooter />
         </>
-
     )
 }

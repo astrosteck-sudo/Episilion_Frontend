@@ -74,11 +74,11 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
             return;
         }
 
-        let userMinPrice = minPrice;
-        let userMaxPrice = maxPrice;
+        let userMinPrice = Number(minPrice);
+        let userMaxPrice = Number(maxPrice);
 
         //THIW WILL INTERCHANGE THE VALUES WHEN THE MIN PRICE IS GREATOR THAN THE MAX PRICE
-        if (minPrice > maxPrice) {
+        if (userMaxPrice < userMinPrice) {
             [userMinPrice, userMaxPrice] = [userMaxPrice, userMinPrice]
         }
 

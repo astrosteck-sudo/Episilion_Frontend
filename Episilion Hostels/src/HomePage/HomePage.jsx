@@ -20,7 +20,8 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     const [searchHostelName, setSearchHostelName] = useState('')
     const [filter, setFilter] = useState();
     const [suggestionBoxOpen, setSuggestionBoxOpen] = useState(true)
-    const [value, setValue] = useState('')
+    const [value, setValue] = useState('');
+    const [hostelsFound, setHostelsFound] = useState(true);
 
     const filterMenu = useRef(null) //THIS WILL SELECT THE filter menu 
 
@@ -30,7 +31,6 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     //THIS IS FOR THE FILTER MENU
     function openFilterMenu() {
         if (filterMenu.current) {
-            console.log(filterMenu)
             filterMenu.current.style.opacity = 1;
             filterMenu.current.style.pointerEvents = 'auto';
         }
@@ -67,10 +67,19 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         setMaxPrice(event.target.value)
     }
     function searchHostels() {
+        setHostelsFound(true)
         if (!gender && !minPrice && !maxPrice) {
             filterMenu.current.style.opacity = 0;
             filterMenu.current.style.pointerEvents = 'none';
             return;
+        }
+
+        let userMinPrice = minPrice;
+        let userMaxPrice = maxPrice;
+
+        //THIW WILL INTERCHANGE THE VALUES WHEN THE MIN PRICE IS GREATOR THAN THE MAX PRICE
+        if (minPrice > maxPrice) {
+            [userMinPrice, userMaxPrice] = [userMaxPrice, userMinPrice]
         }
 
         //THIS FILTERS FROM THE originalHostelCardData AND PUTS THE VALUES INTO THE 
@@ -79,20 +88,30 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         // THE MAIN IDEA HERE IS , originalHostelCardData AND hostelsCardData HAS THE SAME VALUES AT THE START
         //OF THE PROGRAM, BUT hostelsCardData WILL ALWAYS CHANGE DEPENDING ON THE FILTER USED.
         //BUT THE FILTER WILL ALWAYS FILTER FROM THE UNCHANGING originalHostelCardData
-        if (gender && minPrice && maxPrice) {
+        if (gender && userMinPrice && userMaxPrice) {
             const filteredHostels = originalHostelCardData.filter(
-                (hostel) => hostel.type === gender && hostel.pricing.priceMin >= minPrice && hostel.pricing.priceMin <= maxPrice
+                (hostel) => hostel.type === gender && hostel.pricing.priceMin >= userMinPrice && hostel.pricing.priceMin <= userMaxPrice
             )
             sethostelsCardData(filteredHostels);
             filterMenu.current.style.opacity = 0;
             filterMenu.current.style.pointerEvents = 'none';
-        } else if (gender || minPrice || maxPrice) {
+        } else if (gender || userMinPrice || userMaxPrice) {
+            console.log("Min Price", userMinPrice)
+            console.log("Max Price", userMaxPrice)
             const filteredHostels = originalHostelCardData.filter(
-                (hostel) => hostel.type === gender || hostel.pricing.priceMin >= minPrice && hostel.pricing.priceMin <= maxPrice
+                (hostel) => hostel.type === gender || hostel.pricing.priceMin >= userMinPrice && hostel.pricing.priceMin <= userMaxPrice
             )
-            sethostelsCardData(filteredHostels);
-            filterMenu.current.style.opacity = 0;
-            filterMenu.current.style.pointerEvents = 'none';
+            if (filteredHostels.length === 0) {
+                sethostelsCardData([])//THIS WILL EMPTY ANY VALUE IN hostelsCardData
+                setHostelsFound(false)//AND THIS WILL DISPLAY THE NOT FOUND TEXT
+                filterMenu.current.style.opacity = 0;
+                filterMenu.current.style.pointerEvents = 'none';
+            } else {
+                sethostelsCardData(filteredHostels);
+                filterMenu.current.style.opacity = 0;
+                filterMenu.current.style.pointerEvents = 'none';
+            }
+
         }
 
         //THIS RESET THE VALUES ON THE USER SCREEN
@@ -151,6 +170,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     //THIS FUNCTION TAKES THE HOSTEL NAME AS A PARAMETER, IT THE FILTERS THE HOSTEL IN THE originalHostelCardData
     //TO SEE IF ANY HOSTEL NAME MATCH IF IT DOES THEN IT sethostelsCardData TO THAT HOSTEL OBJECT
     function suggestionHostelClicked(parameter) {
+        setHostelsFound(true)
         setSuggestionBoxOpen(false)
         setValue(parameter)
 
@@ -162,8 +182,9 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     }
 
 
-    const [hostelsFound, setHostelsFound] = useState(true);
+
     function searchHostelByName() {
+        setHostelsFound(true)
         //THIS WILL MAKE SURE NOTHING HAPPENS WHEN THE USER PREESES 
         // THE SEARCH BUTTON WHEN THERE IS NOTHING IN THE SEARCH INPUT
         if (!searchHostelName) {
@@ -184,7 +205,6 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
             sethostelsCardData(filteredHostels);
             console.log(filteredHostels)
         }
-
     }
 
 
@@ -285,7 +305,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
             <section className="hostels-section">
                 {hostelsFound ? "" :
                     <div className="no-results">
-                        <p className="not-found-text">No Hostel Found With Name <span className="not-found-hostel-name">{searchHostelName}</span></p>
+                        <p className="not-found-text">No Hostel Found<span className="not-found-hostel-name"></span></p>
                         <img src={noResultImage} className="not-found-icon" alt="Sort"></img>
                     </div>
                 }

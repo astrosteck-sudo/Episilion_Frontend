@@ -1,6 +1,5 @@
 import { PageHeader } from "../PageHeader/PageHeader";
 import styles from  './logins.module.css';
-import closedEye from '../assets/icons/closed-eyes.png'
 import { SiteFooter } from "../SiteFooter/SiteFooter";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";

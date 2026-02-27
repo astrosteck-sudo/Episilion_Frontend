@@ -132,12 +132,12 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
 
 
 
-    //THIS IS FOR THE SUGGESTIONBOX AND SEARCH BAR
+                                  //THIS IS FOR THE SUGGESTIONBOX AND SEARCH BAR
     function userSearchedHostelName(event) {
         setSuggestionBoxOpen(true)
         setValue(event.target.value)//THIS MAKES SURE THAT AS THE USER TYPES THE TEXT IS DISPLAYED ON THE THE SEARCH INPUT
         //.trim() removes leading/trailing spaces. 
-        // .replace(/\s+/g, " ",) collapses multiple spaces into one. 
+        // .replace(/\s+/g, "",) collapses multiple spaces into NONE. 
         // .toLowerCase() normalizes casing.
         const typedtext = event.target.value
             .trim()
@@ -176,7 +176,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
 
         //suggestionsDiv.current.style.display = 'none';
         const filteredHostel = originalHostelCardData.filter(
-            (hostel) => hostel.name.trim().replace(/\s+/g, " ").toLowerCase() === parameter.trim().replace(/\s+/g, " ").toLowerCase()
+            (hostel) => hostel.name.trim().replace(/\s+/g, "").toLowerCase() === parameter.trim().replace(/\s+/g, "").toLowerCase()
         )
         sethostelsCardData(filteredHostel);
     }
@@ -192,18 +192,15 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         }
         let filteredHostels = false
         filteredHostels = originalHostelCardData.filter(
-            (hostel) => hostel.name.trim().replace(/\s+/g, " ").toLowerCase() === searchHostelName
+            //(hostel) => hostel.name.trim().replace(/\s+/g, "").toLowerCase() === searchHostelName.replace(/\s+/g, "")
+            (hostel) => hostel.name.trim().replace(/\s+/g, "").toLowerCase().includes(searchHostelName.replace(/\s+/g, ""))
         )
-
-        console.log(filteredHostels)
 
         if (filteredHostels.length === 0) {
             sethostelsCardData([])//THIS WILL EMPTY ANY VALUE IN hostelsCardData
             setHostelsFound(false)//AND THIS WILL DISPLAY THE NOT FOUND TEXT
-
         } else {
             sethostelsCardData(filteredHostels);
-            console.log(filteredHostels)
         }
     }
 

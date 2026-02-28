@@ -12,7 +12,8 @@ import { useState } from 'react';
 
 
 export function MoreDetailsPage({ hostelsCardData, navlink, setNavLink, originalHostelCardData }) {
-    const [close, setClose] = useState(true)
+    const [close, setClose] = useState(true);
+    const [activate, setActivate] = useState(false)
     const params = new URLSearchParams(window.location.search);
 
     const hostelId = params.get("hostelId")
@@ -20,15 +21,15 @@ export function MoreDetailsPage({ hostelsCardData, navlink, setNavLink, original
 
     const [googleMapSrc, setGoogleMapSrc] = useState('')
     function showHostelLocationOnMap() {
-        setClose(false); 
-        
-        const hostel = originalHostelCardData.find(h => h.id === hostelId); 
-        if (hostel && hostel.location) { 
-            const { latitude, longitude } = hostel.location; 
-            console.log(latitude, longitude); 
+        setClose(false);
+        setActivate(true)
+        const hostel = originalHostelCardData.find(h => h.id === hostelId);
+        if (hostel && hostel.location) {
+            const { latitude, longitude } = hostel.location;
+            //console.log(latitude, longitude);
             // You can now use latitude and longitude to build your map URL 
-            const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}&hl=es&z=15&output=embed`; 
-            setGoogleMapSrc(mapUrl); 
+            const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}&hl=es&z=15&output=embed`;
+            setGoogleMapSrc(mapUrl);
         } else { console.error("Hostel not found or missing location data."); }
 
 
@@ -49,11 +50,13 @@ export function MoreDetailsPage({ hostelsCardData, navlink, setNavLink, original
     }
 
     function closeMap() {
-        if (!close) {
+        console.log('Close has bee clciked')
+        if (!close) {   
+            setActivate(false)  
             setClose(true)
-        } else (
+        } else {
             setClose(false)
-        )
+        }
     }
 
     return (
@@ -88,15 +91,20 @@ export function MoreDetailsPage({ hostelsCardData, navlink, setNavLink, original
                                                 <button className="view-location js-view-location" onClick={showHostelLocationOnMap}>View Location</button>
                                                 <button className="view-location js-get-directions">Get Directions</button>
                                             </div>
-                                            <div className={`iframe-container ${close ? 'close' : ''}`}>
-                                                <div className='close-button'><img src={closeMapImage} alt="" className='close-image' onClick={closeMap} /></div>
-                                                <iframe
-                                                    src={googleMapSrc}
-                                                    className='iframe'
-                                                    frameborder="1"
-                                                    loading='lazy'
-                                                    title='Hostel Location'></iframe>
+                                            <div className={`overlay-background ${activate ? 'activate' : ''}`}>
+                                                <div className='map-modal'>
+                                                    <div className={`iframe-container ${close ? 'close' : ''}`}>
+                                                        <div className='close-button'><img src={closeMapImage} alt="" className='close-image' onClick={closeMap} /></div>
+                                                        <iframe
+                                                            src={googleMapSrc}
+                                                            className='iframe'
+                                                            frameborder="1"
+                                                            loading='lazy'
+                                                            title='Hostel Location'></iframe>
+                                                    </div>
+                                                </div>
                                             </div>
+
 
                                         </div>
                                     </div>

@@ -1,12 +1,15 @@
-
+import { useNavigate } from "react-router-dom";
 
 
 
 export function HostelCard({ hostel }) {
 
-   
-    function showHostelId(parameter){
-        window.location.href = `moreDetails?hostelId=${parameter}`;
+    const navigate = useNavigate();
+    // function showHostelId(parameter){
+    //     window.location.href = `moreDetails?hostelId=${parameter}`;
+    // }
+    function showHostelId(parameter) {
+        navigate(`/moreDetails?hostelId=${parameter}`);
     }
 
     return (
@@ -32,7 +35,7 @@ export function HostelCard({ hostel }) {
                     <td colSpan="3"><p id="hostel-perks">{hostel.hostelPerks}</p></td>
                 </tr>
             </table>
-            <p><button className="view-more-details js-view-more-details" onClick={() => showHostelId(hostel.id)}>View Details</button></p> 
+            <p><button className="view-more-details js-view-more-details" onClick={() => showHostelId(hostel.id)}>View Details</button></p>
         </div>
     )
 }

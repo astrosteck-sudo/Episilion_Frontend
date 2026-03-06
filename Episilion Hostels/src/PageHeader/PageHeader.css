@@ -159,7 +159,7 @@
   .hamburger-button {
     display: block;
     cursor: pointer;
-    width: 5%;
+    width: min(40px, 10%);
     height: 100%;
     border: none;
   }
@@ -181,7 +181,6 @@
 @media screen and (max-width: 600px){
 
   .hamburger-button {
-    width: 9%;
     height: 20%;
     
   }
@@ -205,8 +204,6 @@
 
 @media screen and (min-width: 600px) and (max-width: 992px){
   .hamburger-button {
-    width: 8%;
     height: 50%;
-    border: none;
   }
 }

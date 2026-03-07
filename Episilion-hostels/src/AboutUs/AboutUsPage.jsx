@@ -12,13 +12,14 @@ export function AboutUsPage({ navlink, setNavLink }) {
     const [teamData, setTeamData] = useState([]);
 
     const loadTeamCards = async () => {
-        const reposnse = await axios.get('./hostel_data/team_Members_data.json')
-        setTeamData(reposnse.data);
+        const reposnse = await axios.get('http://localhost:5000/api/teamMembers');
+        setTeamData(reposnse.data.teamMembers);
     }
 
     useEffect(() => {
         loadTeamCards();
     }, [])
+    
 
 
     return (

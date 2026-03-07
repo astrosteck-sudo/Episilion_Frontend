@@ -5,14 +5,15 @@ const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const DATA_FILE = path.join(__dirname, "hostel_data.json");
+//const DATA_FILE = path.join(__dirname, "hostel_data.json");
 
 // ── Middleware ────────────────────────────────────────────────────────────────
 app.use(cors());          // Allow requests from any frontend origin
 app.use(express.json());  // Parse JSON request bodies
 
 // ── Helper: read the JSON file ────────────────────────────────────────────────
-function readData() {
+function readData(filePath) {
+  DATA_FILE = path.join(__dirname, filePath)
   const raw = fs.readFileSync(DATA_FILE, "utf-8");
   return JSON.parse(raw);
 }
@@ -22,10 +23,20 @@ function readData() {
 // GET /api/data  → return the entire JSON file
 app.get("/api/data", (req, res) => {
   try {
-    const data = readData();
+    const data = readData("hostel_data.json");
     res.json({ success: true, data });
   } catch (err) {
     res.status(500).json({ success: false, message: "Failed to read data file." });
+  }
+});
+
+// GET /api/teamMembers  → return only the teamMembers array
+app.get("/api/teamMembers", (req, res) => {
+  try {
+    const teamMembers = readData("team_Members_data.json");
+    res.json({ success: true, teamMembers });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to read team Members file." });
   }
 });
 

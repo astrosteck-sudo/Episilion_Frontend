@@ -12,8 +12,8 @@ export function MoreFromUsPage({ navlink, setNavLink }) {
     const [moreFromUsData, setMoreFromUs] = useState([])
 
     const loadMoreFromUsCards = async () => {
-        const repsonse = await axios.get('./hostel_data/More_From_Us.json')
-        setMoreFromUs(repsonse.data)
+        const repsonse = await axios.get('http://localhost:5000/api/moreProjects');
+        setMoreFromUs(repsonse.data.moreProjects)
     }
 
     useEffect(() => {

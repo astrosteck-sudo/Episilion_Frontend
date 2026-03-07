@@ -40,6 +40,16 @@ app.get("/api/teamMembers", (req, res) => {
   }
 });
 
+// GET /api/moreProjects  → return only the moreProjects array
+app.get("/api/moreProjects", (req, res) => {
+  try {
+    const moreProjects = readData("More_From_Us.json");
+    res.json({ success: true, moreProjects });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to read more Projects file." });
+  }
+});
+
 // // GET /api/users  → return only the users array
 // app.get("/api/users", (req, res) => {
 //   try {
@@ -93,8 +103,8 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`✅  Server running at http://localhost:${PORT}`);
   console.log(`   GET /api/data`);
-  console.log(`   GET /api/users`);
-  console.log(`   GET /api/users/:id`);
-  console.log(`   GET /api/products`);
-  console.log(`   GET /api/products/:id`);
+  console.log(`   GET /api/teamMembers`);
+  console.log(`   GET /api/moreProjects`);
+  // console.log(`   GET /api/products`);
+  // console.log(`   GET /api/products/:id`);
 });

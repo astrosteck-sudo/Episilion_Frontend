@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom'
 import { TeamCards } from './TeamCards'
 import './AboutUsPage.css'
 
+import facebook from '../assets/icons/contact-us-facebook.png'
+import email from '../assets/icons/contact-us-gmail.png'
+import phone from '../assets/icons/contact-us-phone.png'
+import whatsapp from '../assets/icons/contact-us-whatsapp.png'
 
 
 export function AboutUsPage({ navlink, setNavLink }) {
@@ -19,7 +23,7 @@ export function AboutUsPage({ navlink, setNavLink }) {
     useEffect(() => {
         loadTeamCards();
     }, [])
-    
+
 
 
     return (
@@ -29,7 +33,7 @@ export function AboutUsPage({ navlink, setNavLink }) {
 
             <main className='about-main'>
                 <section className="about-hero">
-                    <h2 className="about-epeisilion-header">About Episilion</h2>
+                    <h2 className="primary-header">About Episilion</h2>
                     <p className="about-paragraph">Helping students find, safe, afforadable, and comfortable, hostels with ease</p>
                 </section>
 
@@ -69,7 +73,7 @@ export function AboutUsPage({ navlink, setNavLink }) {
                 </section>
 
                 <section className="team-section">
-                    <h2 className="meet-the-team-header">Meet the Team</h2>
+                    <h2 className="primary-header">Meet the Team</h2>
                     <div className="team-cards">
                         {teamData.map((teamMember) => {
                             //WITH THIS FOR EACH TEAM MEMEBER IT WILL GENERATE A TeamCards COMPONENT
@@ -78,6 +82,26 @@ export function AboutUsPage({ navlink, setNavLink }) {
                             )
                         })}
                     </div>
+                </section>
+
+                <section>
+                    <h2 className='primary-header'>Contact Us</h2>
+                    <div className='contact-us-container'>
+                        <p className='contact-us-paragraph'>Report an Issue or List Your Hostel
+                            If you notice any incorrect information about a hostel on our platform,
+                            or if you have a hostel near UPSA that you would like to have listed,
+                            please contact us and our team will assist you.
+                        </p>
+
+                        <div className='contact-items'>
+                            <a href="" className='contact-us-icons-container'><img src={facebook} alt="Facebook" className='contact-us-icons' /><p className='contact-us-icon-name'>Episilion.com</p></a>
+                            <a href="" className='contact-us-icons-container'><img src={email} alt="Email" className='contact-us-icons' /><p className='contact-us-icon-name'>epislion@gmail.com</p></a>
+                            <a href="" className='contact-us-icons-container'><img src={phone} alt="Phone" className='contact-us-icons' /><p className='contact-us-icon-name'>0537222558</p></a>
+                            <a href="" className='contact-us-icons-container'><img src={whatsapp} alt="Whatsapp" className='contact-us-icons' /><p className='contact-us-icon-name'>0537222558</p></a>
+                        </div>
+                    </div>
+
+
                 </section>
 
                 <section className="cta">

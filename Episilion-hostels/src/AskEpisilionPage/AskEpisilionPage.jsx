@@ -4,7 +4,7 @@ import { SiteFooter } from "../SiteFooter/SiteFooter";
 import './AskEpisilion.css'
 import { useState } from "react";
 
-export function AskEpisilionPage({ navlink, setNavLink }) {
+export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }) {
     const [userSearchInput, setUserSearchInput] = useState('');
     const [chatMessages, setChatMessages] = useState([]);  // ✅ Initialize as array
 
@@ -24,6 +24,12 @@ export function AskEpisilionPage({ navlink, setNavLink }) {
 
         // ✅ Add Epsilon's response right after the user message
         const response = episilionAnswers[Math.floor(Math.random() * episilionAnswers.length)];
+        // let response = '';
+        // const filteredHostel = originalHostelCardData.find(
+        //     (hostel) => hostel.featured
+        // )
+        // response = filteredHostel.name
+
         const finalMessages = [
             ...updatedMessages,
             { message: response, sender: 'episilion' }

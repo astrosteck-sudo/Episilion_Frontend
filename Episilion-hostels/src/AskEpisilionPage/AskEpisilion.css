@@ -1,7 +1,10 @@
 .ask-episilion-search {
-  position: fixed;       /* keeps it anchored relative to the viewport */
-  bottom: 70px;          /* adjust this so it sits right above your footer */
-  left: 50%;             /* center horizontally */
+  position: fixed;
+  /* keeps it anchored relative to the viewport */
+  bottom: 70px;
+  /* adjust this so it sits right above your footer */
+  left: 50%;
+  /* center horizontally */
   transform: translateX(-50%);
   /* width: 80%;         */
   width: 100vw;
@@ -9,73 +12,86 @@
   /*background: #b4d10c;       style as needed */
   background-color: #d3c84d;
   padding: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-  z-index: 1000;         /* ensures it stays above footer */
+  z-index: 1000;
+  /* ensures it stays above footer */
 
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
 }
-@media only screen and (min-width: 1200px){
-    .ask-episilion-search{
-        bottom: 40px;
-    }
+
+@media only screen and (min-width: 1200px) {
+  .ask-episilion-search {
+    bottom: 40px;
+  }
 }
 
 
-.ask-episilion-input-box{
-    padding: 10px;
-    width: min(700px, 60%);
-    border-radius: 12px;
+.ask-episilion-input-box {
+  padding: 10px;
+  width: min(700px, 60%);
+  border-radius: 12px;
 }
 
-.ask-episilion-search-button{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 10px;
-    background-color: green;
-    font-weight: bold;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.ask-episilion-search-button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
+  background-color: green;
+  font-weight: bold;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .messages {
   display: flex;
-  justify-content: flex-end; /* pushes children to the far right */
+  justify-content: flex-end;
+  /* pushes children to the far right */
 }
 
 .messages {
   position: fixed;
-  bottom: calc(60px + 70px);   /* search bar height + spacing */
+  bottom: calc(60px + 70px);
+  /* search bar height + spacing */
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;                  /* responsive width */
+  width: 90%;
+  /* responsive width */
   max-width: 600px;
   display: flex;
-  flex-direction: column;      /* stack messages vertically */
-  gap: 30px;                   /* spacing between bubbles */
-  z-index: 999;
+  flex-direction: column;
+  /* stack messages vertically */
+  gap: 30px;
+  /* spacing between bubbles */
+  /* z-index: 999; */
 }
 
 /* User message aligned right */
 .user-message {
-  align-self: flex-end;        /* pushes bubble to far right */
+  align-self: flex-end;
+  /* pushes bubble to far right */
   background: #e0f7fa;
   padding: 10px 15px;
   border-radius: 8px;
   max-width: 70%;
   word-wrap: break-word;
+  border-top-right-radius: 0;
+  /* Flattens corner where tail meets */
 }
 
 /* Epsilon message aligned left */
 .episilion-message {
-  align-self: flex-start;      /* pushes bubble to far left */
+  align-self: flex-start;
+  /* pushes bubble to far left */
   background: #f1f1f1;
   padding: 10px 15px;
   border-radius: 8px;
   max-width: 70%;
   word-wrap: break-word;
+  border-top-left-radius: 0;
+  /* Flattens corner where tail meets */
 }

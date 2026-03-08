@@ -4,62 +4,64 @@ import { SiteFooter } from "../SiteFooter/SiteFooter";
 import './AskEpisilion.css'
 import { useState } from "react";
 
-
-
-
-
-
 export function AskEpisilionPage({ navlink, setNavLink }) {
     const [userSearchInput, setUserSearchInput] = useState('');
-    const [userMessage, setUserMessage] = useState('This is the user message');
-    const [episilionMessage, setEpisilionMessage] = useState('This is ask epislion message');
-    const [displayMessage, setDisplayMessage] = useState('')
+    const [chatMessages, setChatMessages] = useState([]);  // ✅ Initialize as array
+
+    const episilionAnswers = ["What can you see", "No hostels available", "Yes no hostel is available", "What more can i say"];
 
     function searchInput(event) {
-        const result = event.target.value;
-        console.log(result)
-        console.log(result)
-        setUserSearchInput(result)
-
+        setUserSearchInput(event.target.value);
     }
 
-    function sendMessage(){
-        setUserMessage(userSearchInput);
-        setUserSearchInput('')
+    function sendMessage() {
+        if (!userSearchInput.trim()) return;  // ✅ Prevent empty messages
+
+        const updatedMessages = [
+            ...chatMessages,
+            { message: userSearchInput, sender: 'user' }
+        ];
+
+        // ✅ Add Epsilon's response right after the user message
+        const response = episilionAnswers[Math.floor(Math.random() * episilionAnswers.length)];
+        const finalMessages = [
+            ...updatedMessages,
+            { message: response, sender: 'episilion' }
+        ];
+
+        setChatMessages(finalMessages);
+        setUserSearchInput('');  // ✅ Clear input after sending
     }
 
-
+    // ✅ Allow sending with Enter key
+    function handleKeyDown(event) {
+        if (event.key === 'Enter') sendMessage();
+    }
 
     return (
         <>
             <PageHeader navlink={navlink} setNavLink={setNavLink} substituteLink={<Link className="link" to="/">Home</Link>} />
-
-
             <div className="messages">
-                <div className="user-message">
-                    {userMessage}
-                    
-                </div>
+                <div className="episilion-message">How can I be of help?</div>
 
-                <div className="episilion-message">
-                    {episilionMessage}
-                </div>
+                {/* ✅ Map over chatMessages array to render each bubble */}
+                {chatMessages.map((chat, index) => (
+                    <div key={index} className={chat.sender === 'user' ? 'user-message' : 'episilion-message'}>
+                        {chat.message}
+                    </div>
+                ))}
             </div>
-
-
             <div className="ask-episilion-search">
                 <input
                     type="text"
                     className="ask-episilion-input-box"
                     onChange={searchInput}
+                    onKeyDown={handleKeyDown}
                     value={userSearchInput}
                 />
                 <button className="ask-episilion-search-button" onClick={sendMessage}>Search</button>
             </div>
-
             <SiteFooter />
         </>
-
-
-    )
+    );
 }

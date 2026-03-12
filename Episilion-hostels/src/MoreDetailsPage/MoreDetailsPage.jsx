@@ -8,6 +8,7 @@ import Email from '../assets/icons/email-14.svg';
 import Manager from '../assets/icons/manager-avatar.svg';
 import Clock from '../assets/icons/clock.svg';
 import closeMapImage from '../assets/icons/close.png';
+import websImage from '../assets/icons/web.png'
 import { useState } from 'react';
 
 
@@ -220,6 +221,13 @@ export function MoreDetailsPage({ hostelsCardData, navlink, setNavLink, original
                                                         {hostel.contact.officeHours}
                                                     </p>
                                                 </div>
+                                                {hostel.contact.website != "" ? <a className="contact-item js-email-address-link" href={`https://${hostel.contact.email}`}>
+                                                    <img src={websImage} alt="website"></img>
+                                                    <p className="font-paragraph js-email-address">
+                                                        {hostel.contact.website}
+                                                    </p>
+                                                </a>: "" }
+
                                             </div>
                                         </div>
                                     </div>

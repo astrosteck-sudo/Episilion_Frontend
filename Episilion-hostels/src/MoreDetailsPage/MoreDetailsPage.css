@@ -1,7 +1,7 @@
 
 .more-details{
   margin-top: 5px;
-  margin-bottom: 35px;
+  margin-bottom: 40px;
   padding: 7px;
 }
 
@@ -302,6 +302,7 @@ p.font-paragraph{
   gap: 20px;              /* space between sections */
   align-items: flex-start; /* align tops */
   flex-wrap: wrap;        /* allows stacking on small screens */
+  margin-bottom: 40px;
 }
 .management-contact {
   max-width: 600px;   /* keeps it neat on large screens */

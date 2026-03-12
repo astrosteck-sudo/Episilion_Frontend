@@ -102,7 +102,8 @@
 
 
 .filter-image{
-  border: solid #d3c84d;
+  border: solid transparent;
+  background-color: #3ee211;
   width: min(40px, 30%);
   height: min(50px, 10%);
   margin-left: 5px;
@@ -110,7 +111,6 @@
   cursor: pointer;
   position: fixed;/*THIS MAKES THE HEADER STICKY WHEN SCOLLING IF YOU MAKE THIS sticky YOU WONT NEED THE WIDTH*/
   z-index: 1000;/*THIS ENSURES THE button STAYS ABOVE THE CONTENT AND ALWAYS IN FRONT OF THE CONTENT*/
-  background-color: white;
   border-radius: 0px 0px 5px 5px;
 }
 .filter-image:active {

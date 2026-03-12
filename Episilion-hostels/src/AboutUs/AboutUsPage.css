@@ -142,6 +142,7 @@ table {
   text-decoration: none;
   background-image: url('../relay5.jpg');
   animation: animate-scroll 28s linear infinite;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.9);
 }
 
 .browse-hostels-cta-button:hover {
@@ -173,6 +174,7 @@ table {
   padding: 20px;
   /* font-family: Hezba; */
   font-weight: lighter;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 }
 .contact-us-icons-container{
   display: flex;

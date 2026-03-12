@@ -16,7 +16,7 @@ export function LoginPage({ navlink, setNavLink }) {
     return (
         <>
             <title>Login | Episilion Hostels</title>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} substituteLink={<Link className="link" to="/">Home</Link>} />
+            <PageHeader navlink={navlink} setNavLink={setNavLink} />
 
             <main className={styles["logins-main"]}>
                 <div class={styles["login-box"]}>

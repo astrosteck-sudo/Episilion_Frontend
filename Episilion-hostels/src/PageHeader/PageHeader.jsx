@@ -3,7 +3,7 @@ import HamburgerButton from '../assets/icons/hamburger_button_2.png';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
-export function PageHeader({ substituteLink, navlink, setNavLink, originalHostelCardData, sethostelsCardData, setHostelFound }) {
+export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethostelsCardData, setHostelFound }) {
     // const [navlink, setNavLink] = useState(false)
 
     function renderHamburgerMenu(){
@@ -37,7 +37,7 @@ export function PageHeader({ substituteLink, navlink, setNavLink, originalHostel
                     
                 </Link>
                 <nav className={`navigation-links ${navlink ? 'active' : ''}`}>
-                    {substituteLink}
+                    <NavLink className="link about-us-link" to="/" onClick={resetValues}>Home</NavLink>
                     <NavLink className="link about-us-link" to="/aboutus">About Us</NavLink>
                     <NavLink className="link ask-episilion" to="/askepisilion">Ask Episilion</NavLink>
                     <NavLink className="link more-from-us" to="/morefromus">More From Us</NavLink>

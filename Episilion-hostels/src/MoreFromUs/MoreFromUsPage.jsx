@@ -24,7 +24,7 @@ export function MoreFromUsPage({ navlink, setNavLink }) {
 
         <>
             <title>More From Us | Episilion Hostels</title>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} substituteLink={<Link className="link" to="/">Home</Link>} />
+            <PageHeader navlink={navlink} setNavLink={setNavLink} />
 
 
             <section class="more-from-us-section js-more-from-us-section">

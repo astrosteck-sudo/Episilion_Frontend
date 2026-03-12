@@ -74,7 +74,7 @@ export function MoreDetailsPage({ hostelsCardData, navlink, setNavLink, original
     return (
         <>
             <title>View Details | Episilion Hostels</title>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} substituteLink={<Link className="link" to="/">Home</Link>} />
+            <PageHeader navlink={navlink} setNavLink={setNavLink} />
 
 
             <section className="more-details js-more-details">

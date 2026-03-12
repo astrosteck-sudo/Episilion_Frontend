@@ -46,7 +46,7 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
 
     return (
         <>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} substituteLink={<Link className="link" to="/">Home</Link>} />
+            <PageHeader navlink={navlink} setNavLink={setNavLink} />
             <div className="messages">
                 <div className="episilion-message">How can I be of help?</div>
 

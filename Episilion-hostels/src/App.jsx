@@ -17,8 +17,8 @@ function App() {
   const [navlink, setNavLink] = useState(false);
 
   const loadHostelsCard = async () => {
-    //const response = await axios.get('https://episilion-backend-2.onrender.com/api/data')
-    const response = await axios.get('http://localhost:5000/api/data')
+    const response = await axios.get('https://episilion-backend-2.onrender.com/api/data')
+    //const response = await axios.get('http://localhost:5000/api/data')
     //console.log(response.data)
     setOriginalHostelCardData(response.data.data)//THIS DATA WILL NEVER CHANGE IN THE PROGRAM
     sethostelsCardData(response.data.data);//THIS DATA WILL CHANGE BASED ON THE FILTER OPTIONS

@@ -12,7 +12,8 @@ export function MoreFromUsPage({ navlink, setNavLink }) {
     const [moreFromUsData, setMoreFromUs] = useState([])
 
     const loadMoreFromUsCards = async () => {
-        const repsonse = await axios.get('http://localhost:5000/api/moreProjects');
+        const repsonse = await axios.get('https://episilion-backend-2.onrender.com/api/moreProjects');
+        //const repsonse = await axios.get('http://localhost:5000/api/moreProjects');
         setMoreFromUs(repsonse.data.moreProjects)
     }
 
